@@ -125,11 +125,7 @@ module Kramdown
         markup=case el.value
                when "iframe" then "{iframe:src=#{el.attr["src"]}}"
                when "pre" then
-                 if inner(el,indent).strip.match(/\n/)
-                   "{code}#{inner(el,indent)}{code}"
-                 else
-                   "{{#{inner(el,indent).strip}}}"
-                 end
+                 "{code}#{inner(el,indent)}{code}"
                else inner(el, indent)
                end
       end
@@ -147,7 +143,7 @@ module Kramdown
         @table_header = true
         "#{inner(el, indent)}"
       end
-      
+
       def convert_tbody(el, indent)
         @table_header = false
         "#{inner(el, indent)}"
@@ -157,15 +153,15 @@ module Kramdown
       def convert_tr(el, indent)
         if @table_header
           "||#{inner(el, indent)}\n"
-        else 
+        else
           "|#{inner(el, indent)}\n"
         end
       end
-      
+
       def convert_td(el, indent)
         if @table_header
           " #{inner(el, indent)} ||"
-        else 
+        else
           " #{inner(el, indent)} |"
         end
       end
@@ -248,7 +244,7 @@ module Kramdown
       end
 
       def handle_iframes(text)
-        markup=text.gsub(/<iframe.*iframe>/) { |match| 
+        markup=text.gsub(/<iframe.*iframe>/) { |match|
           doc =Nokogiri::HTML::DocumentFragment.parse(match)
           element=doc.search('iframe').first
           attributes=element.attributes.map{ |at| "#{at[1].name}=#{at[1].value}"}
