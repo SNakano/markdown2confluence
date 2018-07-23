@@ -199,7 +199,7 @@ module Kramdown
           language, code = el.value.split("\n", 2)
           "{code#{":language=#{language}" if not language.empty?}}\n#{code}{code}\n"
         else
-          "{{#{el.value.strip.gsub(/\{/, '\{').gsub(/\}/, '\}')}}}\n"
+          " {{#{el.value.strip.gsub(/\{/, '\{').gsub(/\}/, '\}')}}} "
         end
       end
 
