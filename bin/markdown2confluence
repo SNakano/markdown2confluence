@@ -3,7 +3,7 @@
 require 'markdown2confluence'
 
 begin
-  puts Kramdown::Document.new(ARGF.read).to_confluence
+  puts Kramdown::Document.new(ARGF.read, input: 'GFM').to_confluence
 rescue Exception => ex
   warn "There was an error running the convertor: \n#{ex}"
 end
